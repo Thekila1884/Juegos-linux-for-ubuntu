@@ -1,3 +1,5 @@
+import { trackEvent } from './firebase-config.js';
+
 const games = [
   {id:'supertuxkart',name:'SuperTuxKart',category:'Acción',version:'1.4',free:true,method:'Flatpak',image:'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80',description:'Carreras de karts con pistas creativas, torneos y personajes del universo libre.',command:'flatpak install flathub net.supertuxkart.SuperTuxKart',youtube:'https://www.youtube.com/results?search_query=SuperTuxKart+Ubuntu+Linux+instalar',rating:'4.8'},
   {id:'0ad',name:'0 A.D.',category:'Estrategia',version:'0.27.0',free:true,method:'APT',image:'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80',description:'Estrategia histórica en tiempo real, de código abierto y sin compras dentro del juego.',command:'sudo apt install 0ad',youtube:'https://www.youtube.com/results?search_query=0ad+Linux+Ubuntu+guia',rating:'4.7'},
@@ -77,29 +79,199 @@ const games = [
   {id:'palworld',name:'Palworld',category:'Aventura',version:'0.6.0',free:false,method:'Steam',image:'https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=900&q=80',description:'Captura criaturas, construye una base y sobrevive en un mundo abierto con amigos.',command:'steam steam://rungameid/1623730',youtube:'https://www.youtube.com/results?search_query=Palworld+Linux+Ubuntu+Proton',rating:'4.3'}
 ];
 
+const additionalGames = [
+  ['apex-legends','Apex Legends','Acción','2.0',true,'Steam','steam steam://rungameid/1172470'],
+  ['warframe','Warframe','Acción','2026.1',true,'Steam','steam steam://rungameid/230410'],
+  ['destiny-2','Destiny 2','Acción','2026.1',true,'Steam','steam steam://rungameid/1085660'],
+  ['path-of-exile','Path of Exile','Acción','3.27',true,'Steam','steam steam://rungameid/238960'],
+  ['path-of-exile-2','Path of Exile 2','Acción','0.4',true,'Steam','steam steam://rungameid/2694490'],
+  ['war-thunder','War Thunder','Acción','2.47',true,'Steam','steam steam://rungameid/236390'],
+  ['team-fortress-2','Team Fortress 2','Acción','1.0',true,'Steam','steam steam://rungameid/440'],
+  ['paladins','Paladins','Acción','1.0',true,'Steam','steam steam://rungameid/444090'],
+  ['brawlhalla','Brawlhalla','Acción','10.2',true,'Steam','steam steam://rungameid/291550'],
+  ['pubg','PUBG: Battlegrounds','Acción','1.0',true,'Steam','steam steam://rungameid/578080'],
+  ['the-finals','THE FINALS','Acción','8.9',true,'Steam','steam steam://rungameid/2073850'],
+  ['halo-infinite','Halo Infinite','Acción','1.0',true,'Steam','steam steam://rungameid/1240440'],
+  ['battlebit-remastered','BattleBit Remastered','Acción','2.2',false,'Steam','steam steam://rungameid/671860'],
+  ['hunt-showdown','Hunt: Showdown 1896','Acción','2.7',false,'Steam','steam steam://rungameid/594650'],
+  ['insurgency-sandstorm','Insurgency: Sandstorm','Acción','1.17',false,'Steam','steam steam://rungameid/581320'],
+  ['payday-2','PAYDAY 2','Acción','1.143',false,'Steam','steam steam://rungameid/218620'],
+  ['dying-light','Dying Light','Acción','1.49',false,'Steam','steam steam://rungameid/239140'],
+  ['dying-light-2','Dying Light 2','Acción','1.22',false,'Steam','steam steam://rungameid/534380'],
+  ['the-forest','The Forest','Aventura','1.12',false,'Steam','steam steam://rungameid/242760'],
+  ['sons-of-the-forest','Sons of the Forest','Aventura','1.0',false,'Steam','steam steam://rungameid/1326470'],
+  ['raft','Raft','Aventura','1.09',false,'Steam','steam steam://rungameid/648800'],
+  ['green-hell','Green Hell','Aventura','2.4',false,'Steam','steam steam://rungameid/815370'],
+  ['astroneer','Astroneer','Aventura','1.36',false,'Steam','steam steam://rungameid/361420'],
+  ['grounded','Grounded','Aventura','1.4',false,'Steam','steam steam://rungameid/962130'],
+  ['enshrouded','Enshrouded','Aventura','0.9',false,'Steam','steam steam://rungameid/1203620'],
+  ['core-keeper','Core Keeper','Aventura','1.1',false,'Steam','steam steam://rungameid/1621690'],
+  ['starbound','Starbound','Aventura','1.4.4',false,'Steam','steam steam://rungameid/211820'],
+  ['dont-starve','Don’t Starve','Aventura','1.20',false,'Steam','steam steam://rungameid/219740'],
+  ['raft-survival','Stranded Deep','Aventura','1.0',false,'Steam','steam steam://rungameid/313120'],
+  ['greenlight','The Planet Crafter','Aventura','1.0',false,'Steam','steam steam://rungameid/1284190'],
+  ['astroneer-dlc','Astroneer: Glitchwalkers','Aventura','1.0',false,'Steam','steam steam://rungameid/361420'],
+  ['outer-wilds','Outer Wilds','Aventura','1.1',false,'Steam','steam steam://rungameid/753640'],
+  ['firewatch','Firewatch','Aventura','1.1',false,'Steam','steam steam://rungameid/383870'],
+  ['kentucky-route-zero','Kentucky Route Zero','Aventura','1.0',false,'Steam','steam steam://rungameid/231200'],
+  ['life-is-strange','Life is Strange','Aventura','1.0',false,'Steam','steam steam://rungameid/319630'],
+  ['life-is-strange-2','Life is Strange 2','Aventura','1.0',false,'Steam','steam steam://rungameid/895390'],
+  ['telltale-walking-dead','The Walking Dead','Aventura','1.0',false,'Steam','steam steam://rungameid/207610'],
+  ['oxenfree','Oxenfree','Aventura','2.0',false,'Steam','steam steam://rungameid/388880'],
+  ['what-remains-edith-finch','What Remains of Edith Finch','Aventura','1.0',false,'Steam','steam steam://rungameid/501300'],
+  ['return-of-the-obra-dinn','Return of the Obra Dinn','Aventura','1.0',false,'Steam','steam steam://rungameid/653530'],
+  ['outer-worlds','The Outer Worlds','Aventura','1.0',false,'Steam','steam steam://rungameid/578650'],
+  ['kingdom-come','Kingdom Come: Deliverance','Aventura','1.9',false,'Steam','steam steam://rungameid/379430'],
+  ['assassins-creed-odyssey','Assassin’s Creed Odyssey','Aventura','1.6',false,'Steam','steam steam://rungameid/812140'],
+  ['horizon-zero-dawn','Horizon Zero Dawn','Aventura','1.0',false,'Steam','steam steam://rungameid/1151640'],
+  ['death-stranding','DEATH STRANDING','Aventura','1.0',false,'Steam','steam steam://rungameid/1190460'],
+  ['control','Control','Acción','1.30',false,'Steam','steam steam://rungameid/870780'],
+  ['doom-2016','DOOM','Acción','6.66',false,'Steam','steam steam://rungameid/379720'],
+  ['doom-eternal','DOOM Eternal','Acción','6.66',false,'Steam','steam steam://rungameid/782330'],
+  ['wolfenstein-new-order','Wolfenstein: The New Order','Acción','1.0',false,'Steam','steam steam://rungameid/201810'],
+  ['metro-exodus','Metro Exodus','Acción','2.0',false,'Steam','steam steam://rungameid/412020'],
+  ['prey','Prey','Acción','1.0',false,'Steam','steam steam://rungameid/480490'],
+  ['dishonored-2','Dishonored 2','Acción','1.77',false,'Steam','steam steam://rungameid/403640'],
+  ['deathloop','DEATHLOOP','Acción','1.0',false,'Steam','steam steam://rungameid/1252330'],
+  ['doom-3','DOOM 3','Acción','1.3',false,'Steam','steam steam://rungameid/208200'],
+  ['shadow-warrior-2','Shadow Warrior 2','Acción','1.1',false,'Steam','steam steam://rungameid/324800'],
+  ['serious-sam-4','Serious Sam 4','Acción','1.10',false,'Steam','steam steam://rungameid/257420'],
+  ['devil-may-cry-5','Devil May Cry 5','Acción','1.0',false,'Steam','steam steam://rungameid/601150'],
+  ['street-fighter-6','Street Fighter 6','Acción','1.22',false,'Steam','steam steam://rungameid/1364780'],
+  ['tekken-8','TEKKEN 8','Acción','2.04',false,'Steam','steam steam://rungameid/1778820'],
+  ['mortal-kombat-11','Mortal Kombat 11','Acción','1.0',false,'Steam','steam steam://rungameid/976310'],
+  ['dragon-ball-fighterz','DRAGON BALL FighterZ','Acción','1.35',false,'Steam','steam steam://rungameid/678950'],
+  ['sifu','Sifu','Acción','1.0',false,'Steam','steam steam://rungameid/2138710'],
+  ['nier-automata','NieR:Automata','Acción','1.0',false,'Steam','steam steam://rungameid/524220'],
+  ['metal-gear-rising','METAL GEAR RISING: REVENGEANCE','Acción','1.0',false,'Steam','steam steam://rungameid/235460'],
+  ['bayonetta','Bayonetta','Acción','1.0',false,'Steam','steam steam://rungameid/460790'],
+  ['tunic','TUNIC','Aventura','1.0',false,'Steam','steam steam://rungameid/553420'],
+  ['death-door','Death’s Door','Aventura','1.0',false,'Steam','steam steam://rungameid/894020'],
+  ['the-pathless','The Pathless','Aventura','1.0',false,'Steam','steam steam://rungameid/1492680'],
+  ['a-short-hike','A Short Hike','Indie','1.0',false,'Steam','steam steam://rungameid/1055540'],
+  ['spiritfarer','Spiritfarer','Indie','1.15',false,'Steam','steam steam://rungameid/972660'],
+  ['graveyard-keeper','Graveyard Keeper','Indie','1.5',false,'Steam','steam steam://rungameid/599140'],
+  ['cult-of-the-lamb','Cult of the Lamb','Indie','1.4',false,'Steam','steam steam://rungameid/1313140'],
+  ['dave-the-diver','DAVE THE DIVER','Indie','1.0',false,'Steam','steam steam://rungameid/1868140'],
+  ['cocoon','COCOON','Indie','1.0',false,'Steam','steam steam://rungameid/1497440'],
+  ['the-case-of-the-golden-idol','The Case of the Golden Idol','Indie','1.0',false,'Steam','steam steam://rungameid/1677770'],
+  ['papers-please','Papers, Please','Indie','1.4',false,'Steam','steam steam://rungameid/239030'],
+  ['returnal','Returnal','Acción','1.0',false,'Steam','steam steam://rungameid/1649240'],
+  ['ghostrunner','Ghostrunner','Acción','1.0',false,'Steam','steam steam://rungameid/1139900'],
+  ['ghostrunner-2','Ghostrunner 2','Acción','1.0',false,'Steam','steam steam://rungameid/2144740'],
+  ['neon-white','Neon White','Acción','1.0',false,'Steam','steam steam://rungameid/1533420'],
+  ['ultrakill','ULTRAKILL','Acción','5.0',false,'Steam','steam steam://rungameid/1229490'],
+  ['boomerang-x','Boomerang X','Acción','1.0',false,'Steam','steam steam://rungameid/1170060'],
+  ['enter-the-gungeon','Enter the Gungeon','Acción','2.1.9',false,'Steam','steam steam://rungameid/311690'],
+  ['wizard-of-legend','Wizard of Legend','Acción','1.24',false,'Steam','steam steam://rungameid/445980'],
+  ['loop-hero','Loop Hero','Estrategia','1.155',false,'Steam','steam steam://rungameid/1282730'],
+  ['into-the-breach','Into the Breach','Estrategia','1.2.83',false,'Steam','steam steam://rungameid/590380'],
+  ['frostpunk','Frostpunk','Estrategia','1.6',false,'Steam','steam steam://rungameid/323190'],
+  ['frostpunk-2','Frostpunk 2','Estrategia','1.0',false,'Steam','steam steam://rungameid/1601580'],
+  ['surviving-mars','Surviving Mars','Estrategia','1.0',false,'Steam','steam steam://rungameid/464920'],
+  ['surviving-the-aftermath','Surviving the Aftermath','Estrategia','1.0',false,'Steam','steam steam://rungameid/684450'],
+  ['oxygen-not-included','Oxygen Not Included','Estrategia','686972',false,'Steam','steam steam://rungameid/457140'],
+  ['prison-architect','Prison Architect','Estrategia','1.0',false,'Steam','steam steam://rungameid/233450'],
+  ['two-point-hospital','Two Point Hospital','Estrategia','1.0',false,'Steam','steam steam://rungameid/535930'],
+  ['parkitect','Parkitect','Estrategia','1.11',false,'Steam','steam steam://rungameid/453090'],
+  ['dorfromantik','Dorfromantik','Estrategia','1.1',false,'Steam','steam steam://rungameid/1455840'],
+  ['against-the-storm','Against the Storm','Estrategia','1.7',false,'Steam','steam steam://rungameid/1336490'],
+  ['anno-1800','Anno 1800','Estrategia','17.0',false,'Lutris','lutris install anno-1800'],
+  ['total-war-warhammer-3','Total War: WARHAMMER III','Estrategia','6.2',false,'Steam','steam steam://rungameid/1142710'],
+  ['starcraft-2','StarCraft II','Estrategia','5.0',true,'Lutris','lutris install starcraft-2'],
+  ['heroes-of-the-storm','Heroes of the Storm','Estrategia','2.0',true,'Lutris','lutris install heroes-of-the-storm'],
+  ['age-of-empires-ii-de','Age of Empires II: Definitive Edition','Estrategia','26.7',false,'Steam','steam steam://rungameid/813780'],
+  ['company-of-heroes-2','Company of Heroes 2','Estrategia','4.0',false,'Steam','steam steam://rungameid/231430'],
+  ['xcom-2','XCOM 2','Estrategia','1.0',false,'Steam','steam steam://rungameid/268500'],
+  ['shadowrun-returns','Shadowrun Returns','Estrategia','1.2',false,'Steam','steam steam://rungameid/234650'],
+  ['pillars-of-eternity','Pillars of Eternity','Aventura','3.07',false,'Steam','steam steam://rungameid/291650'],
+  ['pathfinder-wrath','Pathfinder: Wrath of the Righteous','Aventura','2.5',false,'Steam','steam steam://rungameid/1184370'],
+  ['solasta','Solasta: Crown of the Magister','Estrategia','1.6',false,'Steam','steam steam://rungameid/1096530'],
+  ['yakuza-like-a-dragon','Yakuza: Like a Dragon','Aventura','1.0',false,'Steam','steam steam://rungameid/1235140'],
+  ['persona-5-royal','Persona 5 Royal','Aventura','1.0',false,'Steam','steam steam://rungameid/1687950'],
+  ['final-fantasy-xiv','FINAL FANTASY XIV Online','Aventura','7.4',false,'Steam','steam steam://rungameid/39210'],
+  ['elder-scrolls-online','The Elder Scrolls Online','Aventura','10.2',false,'Steam','steam steam://rungameid/306130'],
+  ['guild-wars-2','Guild Wars 2','Aventura','1.0',true,'Lutris','lutris install guild-wars-2'],
+  ['albion-online','Albion Online','Aventura','1.0',true,'Flatpak','flatpak install flathub com.albiononline.AlbionOnline'],
+  ['black-desert','Black Desert','Aventura','1.0',false,'Steam','steam steam://rungameid/582660'],
+  ['terraria-tmodloader','tModLoader','Indie','2024.11',true,'Steam','steam steam://rungameid/1281930'],
+  ['geometry-dash','Geometry Dash','Indie','2.2',false,'Steam','steam steam://rungameid/322170'],
+  ['limbo','LIMBO','Indie','1.3',false,'Steam','steam steam://rungameid/48000'],
+  ['inside','INSIDE','Indie','1.0',false,'Steam','steam steam://rungameid/304430'],
+  ['little-nightmares','Little Nightmares','Aventura','1.0',false,'Steam','steam steam://rungameid/424840'],
+  ['little-nightmares-2','Little Nightmares II','Aventura','1.0',false,'Steam','steam steam://rungameid/860510'],
+  ['the-sims-4','The Sims 4','Indie','1.0',true,'Lutris','lutris install the-sims-4'],
+  ['cities-skylines','Cities: Skylines','Estrategia','1.19',false,'Steam','steam steam://rungameid/255710'],
+  ['cities-skylines-2','Cities: Skylines II','Estrategia','1.4',false,'Steam','steam steam://rungameid/949230'],
+  ['kerbal-space-program','Kerbal Space Program','Estrategia','1.12',false,'Steam','steam steam://rungameid/220200'],
+  ['space-engineers','Space Engineers','Estrategia','1.206',false,'Steam','steam steam://rungameid/244850'],
+  ['surviving-mars-green','Surviving Mars: Relaunched','Estrategia','1.0',false,'Steam','steam steam://rungameid/1591520'],
+  ['football-manager','Football Manager 2026','Estrategia','26.1',false,'Steam','steam steam://rungameid/3551340'],
+  ['f1-25','F1 25','Acción','1.0',false,'Steam','steam steam://rungameid/3059520'],
+  ['dirt-rally-2','DiRT Rally 2.0','Acción','1.16',false,'Steam','steam steam://rungameid/690790'],
+  ['art-of-rally','art of rally','Indie','1.5',false,'Steam','steam steam://rungameid/550320'],
+  ['wreckfest','Wreckfest','Acción','1.0',false,'Steam','steam steam://rungameid/228380'],
+  ['snowrunner','SnowRunner','Aventura','30.0',false,'Steam','steam steam://rungameid/1465360'],
+  ['beamng-drive','BeamNG.drive','Acción','0.36',false,'Steam','steam steam://rungameid/284160'],
+  ['american-truck-simulator','American Truck Simulator','Indie','1.58',false,'Steam','steam steam://rungameid/270880'],
+  ['wreckfest-2','Wreckfest 2','Acción','0.1',false,'Steam','steam steam://rungameid/1203190'],
+  ['hotline-miami','Hotline Miami','Acción','1.0',false,'Steam','steam steam://rungameid/219150'],
+  ['hotline-miami-2','Hotline Miami 2','Acción','1.0',false,'Steam','steam steam://rungameid/274170'],
+  ['katana-zero','Katana ZERO','Acción','1.0',false,'Steam','steam steam://rungameid/460950'],
+  ['my-friend-pedro','My Friend Pedro','Acción','1.0',false,'Steam','steam steam://rungameid/557340'],
+  ['broforce','Broforce','Acción','1.0',false,'Steam','steam steam://rungameid/274190'],
+  ['castle-crashers','Castle Crashers','Acción','1.0',false,'Steam','steam steam://rungameid/204360'],
+  ['brothers-tale','Brothers: A Tale of Two Sons','Aventura','1.0',false,'Steam','steam steam://rungameid/225080'],
+  ['the-witness','The Witness','Aventura','1.0',false,'Steam','steam steam://rungameid/210970'],
+  ['baba-is-you','Baba Is You','Indie','1.0',false,'Steam','steam steam://rungameid/736260'],
+  ['human-fall-flat','Human Fall Flat','Indie','1.0',false,'Steam','steam steam://rungameid/477160'],
+  ['gang-beasts','Gang Beasts','Indie','1.0',false,'Steam','steam steam://rungameid/285900'],
+  ['unrailed','Unrailed!','Indie','3.0',false,'Steam','steam steam://rungameid/1016920'],
+  ['overcooked-2','Overcooked! 2','Indie','1.0',false,'Steam','steam steam://rungameid/728880'],
+  ['moving-out','Moving Out','Indie','1.0',false,'Steam','steam steam://rungameid/996770'],
+  ['trine-4','Trine 4: The Nightmare Prince','Aventura','1.0',false,'Steam','steam steam://rungameid/690640'],
+  ['rayman-legends','Rayman Legends','Aventura','1.0',false,'Lutris','lutris install rayman-legends'],
+  ['beyond-good-and-evil','Beyond Good & Evil','Aventura','1.0',false,'Lutris','lutris install beyond-good-and-evil'],
+  ['prince-of-persia','Prince of Persia: The Sands of Time','Aventura','1.0',false,'Lutris','lutris install prince-of-persia-sands-of-time']
+].map(([id, name, category, version, free, method, command]) => ({
+  id, name, category, version, free, method, command,
+  image: 'https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=900&q=80',
+  description: `${name}: una experiencia recomendada para jugar en Ubuntu mediante ${method}.`,
+  youtube: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} Ubuntu Linux instalar`)}`,
+  rating: 'Nuevo'
+}));
+games.push(...additionalGames.slice(0, 100));
+
 const savedGames = JSON.parse(localStorage.getItem('ubuntu-arcade-community') || '[]');
 games.unshift(...savedGames);
 
 const grid = document.querySelector('#game-grid');
 const searchInput = document.querySelector('#search-input');
-const freeOnly = document.querySelector('#free-only');
 const count = document.querySelector('#results-count');
 const empty = document.querySelector('#empty-state');
 let activeFilter = 'Todos';
+let activeSource = 'Todos';
+const knownSteamIds = { supertuxkart: '90400', '0ad': '597280', wesnoth: '599390', 'endless-sky': '404410', openttd: '1536610', mindustry: '1127400', hedgewars: '321360', teeworlds: '380840', supertux: '15700' };
+
+function getGameImage(game) {
+  const steamId = game.command.match(/steam:\/\/rungameid\/(\d+)/)?.[1] || knownSteamIds[game.id];
+  if (steamId) return `https://cdn.cloudflare.steamstatic.com/steam/apps/${steamId}/header.jpg`;
+  return `https://placehold.co/900x500/17212b/e8f54a?text=${encodeURIComponent(game.name)}`;
+}
 
 function renderGames() {
   const query = searchInput.value.toLowerCase().trim();
   const filtered = games.filter(game => {
     const matchesFilter = activeFilter === 'Todos' || game.category === activeFilter;
-    const matchesFree = !freeOnly.checked || game.free;
+    const matchesSource = activeSource === 'Todos' || (activeSource === 'Gratis' && game.free) || (activeSource === 'De pago' && !game.free) || game.method === activeSource;
     const matchesQuery = [game.name, game.category, game.method, game.description].join(' ').toLowerCase().includes(query);
-    return matchesFilter && matchesFree && matchesQuery;
+    return matchesFilter && matchesSource && matchesQuery;
   });
   count.textContent = `${filtered.length} ${filtered.length === 1 ? 'resultado' : 'resultados'}`;
   empty.hidden = filtered.length !== 0;
   grid.innerHTML = filtered.map(game => `
     <article class="game-card">
-      <div class="game-cover" style="background-image:url('${game.image}')"><span class="cover-label">${game.method}</span></div>
+      <div class="game-cover" style="background-image:url('${getGameImage(game)}')"><span class="cover-label">${game.method}</span></div>
       <div class="game-body"><div class="game-meta"><span>${game.category}</span>${game.free ? '<span class="free-label">● Gratis</span>' : '<span>De pago</span>'}</div>
       <h3>${game.name}</h3><p class="game-desc">${game.description}</p><div class="card-bottom"><span class="version">v${game.version}</span><button class="detail-button" data-game="${game.id}">Ver instalación <span>↗</span></button></div></div>
     </article>`).join('');
@@ -108,16 +280,20 @@ function renderGames() {
 
 function openGame(id) {
   const game = games.find(item => item.id === id);
-  document.querySelector('#modal-content').innerHTML = `<div class="modal-cover" style="background-image:url('${game.image}')"></div><div class="game-meta"><span>${game.category} · ${game.method}</span><span class="free-label">★ ${game.rating}</span></div><h2 id="modal-title">${game.name}</h2><p class="modal-copy">${game.description}</p><div class="modal-command">$ ${game.command}</div><a class="guide-link" href="${game.youtube}" target="_blank" rel="noreferrer">▶ Ver guías en YouTube ↗</a>`;
+  trackEvent('view_game', { game_name: game.name, install_method: game.method });
+  document.querySelector('#modal-content').innerHTML = `<div class="modal-cover" style="background-image:url('${getGameImage(game)}')"></div><div class="game-meta"><span>${game.category} · ${game.method}</span><span class="free-label">★ ${game.rating}</span></div><h2 id="modal-title">${game.name}</h2><p class="modal-copy">${game.description}</p><div class="modal-command">$ ${game.command}</div><a class="guide-link" href="${game.youtube}" target="_blank" rel="noreferrer">▶ Ver guías en YouTube ↗</a>`;
   showModal('game-modal');
 }
 
 function showModal(id) { document.querySelector(`#${id}`).hidden = false; document.body.style.overflow = 'hidden'; }
 function closeModals() { document.querySelectorAll('.modal-backdrop').forEach(modal => modal.hidden = true); document.body.style.overflow = ''; }
 
-document.querySelectorAll('.filter-chip').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('.filter-chip').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeFilter = chip.dataset.filter; renderGames(); }));
-searchInput.addEventListener('input', renderGames);
-freeOnly.addEventListener('change', renderGames);
+document.querySelectorAll('[data-filter]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-filter]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeFilter = chip.dataset.filter; renderGames(); }));
+document.querySelectorAll('[data-source]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-source]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeSource = chip.dataset.source; renderGames(); }));
+searchInput.addEventListener('input', () => {
+  renderGames();
+  if (searchInput.value.trim()) trackEvent('search_catalog', { search_term: searchInput.value.trim().slice(0, 80) });
+});
 document.querySelector('#open-submit').addEventListener('click', () => showModal('submit-modal'));
 document.querySelector('#community-submit').addEventListener('click', () => showModal('submit-modal'));
 document.querySelector('#empty-submit').addEventListener('click', () => showModal('submit-modal'));
@@ -129,7 +305,7 @@ document.querySelector('#submit-form').addEventListener('submit', event => {
   event.preventDefault();
   const data = new FormData(event.target);
   const newGame = { id: `community-${Date.now()}`, name: data.get('name'), category: data.get('category'), version: data.get('version'), free: true, method: 'Comunidad', image: 'https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&w=900&q=80', description: 'Recomendado por la comunidad de Ubuntu Arcade.', command: data.get('command'), youtube: data.get('youtube') || 'https://www.youtube.com/results?search_query=linux+ubuntu+juegos', rating: 'Nuevo' };
-  games.unshift(newGame); localStorage.setItem('ubuntu-arcade-community', JSON.stringify([newGame, ...savedGames])); event.target.reset(); closeModals(); renderGames(); document.querySelector('#explorar').scrollIntoView({behavior:'smooth'});
+  games.unshift(newGame); localStorage.setItem('ubuntu-arcade-community', JSON.stringify([newGame, ...savedGames])); trackEvent('submit_game', { game_name: newGame.name, category: newGame.category }); event.target.reset(); closeModals(); renderGames(); document.querySelector('#explorar').scrollIntoView({behavior:'smooth'});
 });
 
 renderGames();

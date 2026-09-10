@@ -47,7 +47,7 @@
     </section>
 
     <section class="stats-strip" aria-label="Estadísticas del catálogo">
-      <div><strong>128</strong><span>juegos listados</span></div>
+      <div><strong>176</strong><span>juegos listados</span></div>
       <div><strong>42</strong><span>gratuitos</span></div>
       <div><strong>19</strong><span>guías en español</span></div>
       <div class="status"><span class="pulse"></span> Última sincronización <strong>hace 2h</strong></div>
@@ -64,7 +64,17 @@
           <button class="filter-chip" data-filter="Aventura">Aventura</button>
           <button class="filter-chip" data-filter="Indie">Indie</button>
         </div>
-        <label class="free-toggle"><input type="checkbox" id="free-only"><span class="toggle-ui"></span> Solo gratuitos</label>
+        <div class="filter-group source-filters" role="group" aria-label="Filtros de precio y plataforma">
+          <button class="filter-chip active" data-source="Todos">Precio / plataforma</button>
+          <button class="filter-chip" data-source="Gratis">Gratis</button>
+          <button class="filter-chip" data-source="De pago">De pago</button>
+          <button class="filter-chip" data-source="Steam">Steam</button>
+          <button class="filter-chip" data-source="APT">APT</button>
+          <button class="filter-chip" data-source="Flatpak">Flatpak</button>
+          <button class="filter-chip" data-source="Lutris">Lutris</button>
+          <button class="filter-chip" data-source="Oficial">Oficial</button>
+          <button class="filter-chip" data-source="Comunidad">Comunidad</button>
+        </div>
       </div>
       <div class="game-grid" id="game-grid"></div>
       <div class="empty-state" id="empty-state" hidden><span>⌁</span><h3>No encontramos esa partida</h3><p>Prueba con otro término o publica una nueva recomendación.</p><button class="button button-outline" id="empty-submit">Publicar juego</button></div>
@@ -77,14 +87,14 @@
 
     <section class="community-section" id="comunidad">
       <div class="community-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="community-symbol">✦</span></div>
-      <div class="community-copy"><p class="eyebrow">03 / Hecho entre todos</p><h2>Tu setup también<br>puede abrir camino.</h2><p>Ubuntu Arcade es un directorio libre. Añade juegos, corrige comandos y deja una guía para que la siguiente persona llegue a jugar más rápido.</p><button class="button button-yellow" id="community-submit">Añadir un juego <span>↗</span></button></div>
+      <div class="community-copy"><p class="eyebrow">03 / Hecho entre todos</p><h2>Tu setup también<br>puede abrir camino.</h2><p>Ubuntu Arcade es un directorio libre. Añade juegos, corrige comandos y deja una guía para que la siguiente persona llegue a jugar más rápido.</p><button class="button button-yellow" id="community-submit">Añadir un juego <span>↗</span></button><a class="contact-link" href="mailto:vendorssa2006@gmail.com">¿Necesitas ayuda o quieres proponer una mejora? vendorssa2006@gmail.com ↗</a></div>
     </section>
   </main>
 
-  <footer><a class="brand" href="#catalogo"><span class="brand-mark">✳</span><span>ubuntu<span class="brand-accent">/</span>arcade</span></a><span>Un directorio abierto para jugar en Linux.</span><span class="footer-links"><a href="#comunidad">GitHub</a><a href="#comunidad">Licencia MIT</a><a href="#comunidad">Contribuir</a></span></footer>
+  <footer><a class="brand" href="#catalogo"><span class="brand-mark">✳</span><span>ubuntu<span class="brand-accent">/</span>arcade</span></a><span>Un directorio abierto para jugar en Linux.</span><span class="footer-links"><a href="#comunidad">GitHub</a><a href="#comunidad">Licencia MIT</a><a href="mailto:vendorssa2006@gmail.com">Contacto</a></span></footer>
 
   <div class="modal-backdrop" id="game-modal" hidden><article class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" data-close="game-modal" aria-label="Cerrar">×</button><div id="modal-content"></div></article></div>
   <div class="modal-backdrop" id="submit-modal" hidden><article class="modal submit-modal" role="dialog" aria-modal="true" aria-labelledby="submit-title"><button class="modal-close" data-close="submit-modal" aria-label="Cerrar">×</button><p class="eyebrow">Comunidad / Nueva entrada</p><h2 id="submit-title">Publica un juego</h2><p class="modal-intro">Tu aporte aparecerá en este navegador mientras preparamos la revisión comunitaria.</p><form id="submit-form"><label>Nombre del juego<input required name="name" placeholder="Ej. SuperTuxKart"></label><div class="form-row"><label>Género<select name="category"><option>Acción</option><option>Estrategia</option><option>Aventura</option><option>Indie</option></select></label><label>Versión<input required name="version" placeholder="1.0.0"></label></div><label>Comando de instalación<input required name="command" placeholder="flatpak install flathub org.ejemplo.Juego"></label><label>URL de guía en YouTube<input type="url" name="youtube" placeholder="https://youtube.com/watch?v=..."></label><button class="button button-dark" type="submit">Enviar recomendación <span>↗</span></button></form></article></div>
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
