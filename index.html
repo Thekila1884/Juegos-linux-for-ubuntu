@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ubuntu Arcade: catálogo libre de juegos para Linux Ubuntu con comandos de instalación y guías.">
+  <title>Ubuntu Arcade | Juegos para Linux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#catalogo" aria-label="Ubuntu Arcade inicio">
+      <span class="brand-mark">✳</span>
+      <span>ubuntu<span class="brand-accent">/</span>arcade</span>
+    </a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a class="active" href="#catalogo">Catálogo</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#comunidad">Comunidad</a>
+    </nav>
+    <button class="button button-dark" id="open-submit"><span>＋</span> Publicar juego</button>
+  </header>
+
+  <main>
+    <section class="hero" id="catalogo">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="pulse"></span> Directorio comunitario · actualizado 2026</p>
+        <h1>Juega más.<br><em>Configura menos.</em></h1>
+        <p class="hero-text">Una biblioteca abierta para descubrir juegos que funcionan en Ubuntu. Comandos claros, versiones verificadas y guías hechas por la comunidad.</p>
+        <div class="hero-actions">
+          <a class="button button-yellow" href="#explorar">Explorar catálogo <span>↓</span></a>
+          <a class="text-link" href="#comunidad">¿Tienes un juego? <u>Compártelo</u> <span>↗</span></a>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Ilustración de un escritorio Linux con juegos">
+        <div class="terminal-window">
+          <div class="terminal-top"><span class="terminal-dots">● ● ●</span><span>install.sh</span><span>⌁</span></div>
+          <div class="terminal-body"><span class="terminal-muted">user@ubuntu:~$</span> <span>sudo apt install steam</span><br><span class="terminal-green">✓ Instalando dependencias...</span><br><span class="terminal-muted">Listo. Que empiece la partida.</span><span class="cursor">_</span></div>
+        </div>
+        <div class="art-badge"><strong>100%</strong><span>open source<br>friendly</span></div>
+        <div class="art-grid"></div>
+      </div>
+    </section>
+
+    <section class="stats-strip" aria-label="Estadísticas del catálogo">
+      <div><strong>128</strong><span>juegos listados</span></div>
+      <div><strong>42</strong><span>gratuitos</span></div>
+      <div><strong>19</strong><span>guías en español</span></div>
+      <div class="status"><span class="pulse"></span> Última sincronización <strong>hace 2h</strong></div>
+    </section>
+
+    <section class="explore-section" id="explorar">
+      <div class="section-heading"><div><p class="eyebrow">01 / Biblioteca</p><h2>Encuentra tu próxima partida</h2></div><span class="results-count" id="results-count">6 resultados</span></div>
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Buscar juegos, géneros o comandos..." aria-label="Buscar en el catálogo"></label>
+        <div class="filter-group" role="group" aria-label="Filtros de categoría">
+          <button class="filter-chip active" data-filter="Todos">Todos</button>
+          <button class="filter-chip" data-filter="Acción">Acción</button>
+          <button class="filter-chip" data-filter="Estrategia">Estrategia</button>
+          <button class="filter-chip" data-filter="Aventura">Aventura</button>
+          <button class="filter-chip" data-filter="Indie">Indie</button>
+        </div>
+        <label class="free-toggle"><input type="checkbox" id="free-only"><span class="toggle-ui"></span> Solo gratuitos</label>
+      </div>
+      <div class="game-grid" id="game-grid"></div>
+      <div class="empty-state" id="empty-state" hidden><span>⌁</span><h3>No encontramos esa partida</h3><p>Prueba con otro término o publica una nueva recomendación.</p><button class="button button-outline" id="empty-submit">Publicar juego</button></div>
+    </section>
+
+    <section class="how-section" id="como-funciona">
+      <div class="section-heading"><div><p class="eyebrow">02 / Sin misterio</p><h2>De cero a jugar en tres pasos</h2></div></div>
+      <div class="steps"><article><span class="step-number">01</span><h3>Elige tu juego</h3><p>Filtra por género o busca por nombre. Cada ficha indica soporte y versión probada.</p></article><article><span class="step-number">02</span><h3>Copia el comando</h3><p>Instala desde APT, Flatpak, Steam, Lutris o el método recomendado por la comunidad.</p></article><article><span class="step-number">03</span><h3>Abre la guía</h3><p>¿Algo no arranca? Mira la guía en vídeo y comparte tu solución con la comunidad.</p></article></div>
+    </section>
+
+    <section class="community-section" id="comunidad">
+      <div class="community-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="community-symbol">✦</span></div>
+      <div class="community-copy"><p class="eyebrow">03 / Hecho entre todos</p><h2>Tu setup también<br>puede abrir camino.</h2><p>Ubuntu Arcade es un directorio libre. Añade juegos, corrige comandos y deja una guía para que la siguiente persona llegue a jugar más rápido.</p><button class="button button-yellow" id="community-submit">Añadir un juego <span>↗</span></button></div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#catalogo"><span class="brand-mark">✳</span><span>ubuntu<span class="brand-accent">/</span>arcade</span></a><span>Un directorio abierto para jugar en Linux.</span><span class="footer-links"><a href="#comunidad">GitHub</a><a href="#comunidad">Licencia MIT</a><a href="#comunidad">Contribuir</a></span></footer>
+
+  <div class="modal-backdrop" id="game-modal" hidden><article class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" data-close="game-modal" aria-label="Cerrar">×</button><div id="modal-content"></div></article></div>
+  <div class="modal-backdrop" id="submit-modal" hidden><article class="modal submit-modal" role="dialog" aria-modal="true" aria-labelledby="submit-title"><button class="modal-close" data-close="submit-modal" aria-label="Cerrar">×</button><p class="eyebrow">Comunidad / Nueva entrada</p><h2 id="submit-title">Publica un juego</h2><p class="modal-intro">Tu aporte aparecerá en este navegador mientras preparamos la revisión comunitaria.</p><form id="submit-form"><label>Nombre del juego<input required name="name" placeholder="Ej. SuperTuxKart"></label><div class="form-row"><label>Género<select name="category"><option>Acción</option><option>Estrategia</option><option>Aventura</option><option>Indie</option></select></label><label>Versión<input required name="version" placeholder="1.0.0"></label></div><label>Comando de instalación<input required name="command" placeholder="flatpak install flathub org.ejemplo.Juego"></label><label>URL de guía en YouTube<input type="url" name="youtube" placeholder="https://youtube.com/watch?v=..."></label><button class="button button-dark" type="submit">Enviar recomendación <span>↗</span></button></form></article></div>
+  <script src="app.js"></script>
+</body>
+</html>
