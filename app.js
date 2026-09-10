@@ -297,6 +297,38 @@ const moreGames = [
 }));
 games.push(...moreGames);
 
+const emulatorGames = [
+  ['retroarch','RetroArch','Indie','1.19',true,'org.libretro.RetroArch'],
+  ['dolphin','Dolphin Emulator','Indie','2506',true,'org.DolphinEmu.dolphin-emu'],
+  ['pcsx2','PCSX2','Indie','2.4',true,'net.pcsx2.PCSX2'],
+  ['duckstation','DuckStation','Indie','0.1',true,'org.duckstation.DuckStation'],
+  ['ppsspp','PPSSPP','Indie','1.19',true,'org.ppsspp.PPSSPP'],
+  ['mgba','mGBA','Indie','0.10',true,'io.mgba.mGBA'],
+  ['melonds','melonDS','Indie','0.9',true,'net.kuribo64.melonDS'],
+  ['scummvm','ScummVM','Aventura','2.9',true,'org.scummvm.ScummVM'],
+  ['dosbox','DOSBox','Indie','0.75',true,'org.dosbox.DOSBox'],
+  ['dosbox-x','DOSBox-X','Indie','0.83',true,'com.dosbox_x.DOSBox-X'],
+  ['mupen64plus','Mupen64Plus','Indie','2.5',true,'org.mupen64plus.Mupen64Plus'],
+  ['flycast','Flycast','Acción','2.5',true,'org.flycast.Flycast'],
+  ['rpcs3','RPCS3','Indie','0.0.38',true,'net.rpcs3.RPCS3'],
+  ['xemu','xemu','Indie','0.8',true,'app.xemu.xemu'],
+  ['cemu','Cemu','Indie','2.5',true,'info.cemu.Cemu'],
+  ['mednafen','Mednafen','Indie','1.32',true,'org.mednafen.Mednafen'],
+  ['sameboy','SameBoy','Indie','1.0',true,'io.github.sameboy.SameBoy'],
+  ['openmsx','openMSX','Indie','19.1',true,'org.openmsx.openMSX'],
+  ['pcsx-redux','PCSX-Redux','Indie','0.7',true,'net.pcsxredux.PCSX-Redux'],
+  ['ares','ares Emulator','Indie','139',true,'dev.ares.ares'],
+  ['kronos','Kronos Emulator','Indie','2.2',true,'org.kronos.Kronos']
+].map(([id, name, category, version, free, flatpakId]) => ({
+  id, name, category, version, free, method: 'Emulador',
+  command: `flatpak install flathub ${flatpakId}`,
+  image: `https://placehold.co/900x500/17212b/e8f54a?text=${encodeURIComponent(name)}`,
+  description: `${name}: emulador para Linux con perfiles, controles y soporte para importar tus propios juegos y BIOS.`,
+  youtube: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} Ubuntu Linux instalar configurar`)}`,
+  rating: 'Nuevo'
+}));
+games.push(...emulatorGames);
+
 const savedGames = JSON.parse(localStorage.getItem('ubuntu-arcade-community') || '[]');
 games.unshift(...savedGames);
 
@@ -337,6 +369,11 @@ function getLauncherOptions(game) {
     ['Lutris', 'https://lutris.net/downloads', 'Launcher recomendado para este juego'],
     ['Heroic Games Launcher', 'https://heroicgameslauncher.com/downloads', 'Alternativa para tiendas compatibles'],
     ['Bottles', 'https://usebottles.com/download/', 'Gestiona el entorno de Wine']
+  ];
+  if (game.method === 'Emulador') return [
+    ['Flathub', 'https://flathub.org/', 'Descarga y actualiza el emulador'],
+    ['RetroAchievements', 'https://retroachievements.org/', 'Logros compatibles con emuladores'],
+    ['Libretro Docs', 'https://docs.libretro.com/', 'Núcleos, controles y configuración']
   ];
   return [
     ['Ubuntu App Center', 'https://apps.ubuntu.com/', 'Instalación nativa de Ubuntu'],
@@ -380,6 +417,9 @@ function renderGames() {
   }).sort((first, second) => first.name.localeCompare(second.name, 'es', { sensitivity: 'base' }));
   count.textContent = `${filtered.length} ${filtered.length === 1 ? 'resultado' : 'resultados'}`;
   document.querySelector('#total-games').textContent = games.length;
+  document.querySelector('#filter-result-status').textContent = `${filtered.length} ${filtered.length === 1 ? 'resultado' : 'resultados'}`;
+  const activeLabels = [activeFilter !== 'Todos' ? activeFilter : '', activeSource !== 'Todos' ? activeSource : '', activeYear !== 'Todos' ? activeYear : '', activeDimension !== 'Todos' ? activeDimension : ''].filter(Boolean);
+  document.querySelector('#active-filters').textContent = activeLabels.length ? `Activos: ${activeLabels.join(' · ')}` : 'Sin filtros adicionales';
   empty.hidden = filtered.length !== 0;
   grid.innerHTML = filtered.map(game => `
     <article class="game-card">
@@ -416,6 +456,7 @@ document.querySelectorAll('[data-filter]').forEach(chip => chip.addEventListener
 document.querySelectorAll('[data-source]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-source]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeSource = chip.dataset.source; renderGames(); }));
 document.querySelectorAll('[data-year]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-year]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeYear = chip.dataset.year; renderGames(); }));
 document.querySelectorAll('[data-dimension]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-dimension]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeDimension = chip.dataset.dimension; renderGames(); }));
+document.querySelector('#reset-filters').addEventListener('click', () => { activeFilter = 'Todos'; activeSource = 'Todos'; activeYear = 'Todos'; activeDimension = 'Todos'; searchInput.value = ''; document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active')); document.querySelector('[data-filter="Todos"]').classList.add('active'); document.querySelector('[data-source="Todos"]').classList.add('active'); document.querySelector('[data-year="Todos"]').classList.add('active'); document.querySelector('[data-dimension="Todos"]').classList.add('active'); renderGames(); });
 searchInput.addEventListener('input', () => {
   renderGames();
   if (searchInput.value.trim()) trackEvent('search_catalog', { search_term: searchInput.value.trim().slice(0, 80) });
