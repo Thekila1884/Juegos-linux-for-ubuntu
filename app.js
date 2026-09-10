@@ -280,8 +280,29 @@ const directDownloadGames = [
 }));
 games.push(...directDownloadGames);
 
+const moreGames = [
+  ['a-plague-tale-innocence','A Plague Tale: Innocence','Aventura','1.0',false,752590], ['a-plague-tale-requiem','A Plague Tale: Requiem','Aventura','1.0',false,1182900], ['alan-wake-2','Alan Wake 2','Aventura','1.0',false,2383990], ['alien-isolation','Alien: Isolation','Acción','1.0',false,214490], ['amnesia-dark-descent','Amnesia: The Dark Descent','Aventura','1.0',false,57300], ['amnesia-rebirth','Amnesia: Rebirth','Aventura','1.0',false,999220], ['atomic-heart','Atomic Heart','Acción','1.0',false,668580], ['aveum','Immortals of Aveum','Acción','1.0',false,2009100], ['bastion','Bastion','Indie','1.0',false,107100], ['battlefield-1','Battlefield 1','Acción','1.0',false,1238840],
+  ['battlefield-4','Battlefield 4','Acción','1.0',false,1238860], ['black-mesa','Black Mesa','Acción','1.0',false,362890], ['blasphemous','Blasphemous','Acción','1.0',false,774361], ['blasphemous-2','Blasphemous 2','Acción','1.0',false,2114740], ['bloodstained','Bloodstained: Ritual of the Night','Acción','1.0',false,692850], ['borderlands-3','Borderlands 3','Acción','1.0',false,397540], ['call-of-duty-world-war-2','Call of Duty: WWII','Acción','1.0',false,476600], ['chivalry-2','Chivalry 2','Acción','1.0',false,1824220], ['cities-in-motion-2','Cities in Motion 2','Estrategia','1.0',false,225420], ['cloudpunk','Cloudpunk','Aventura','1.0',false,746850],
+  ['comanche','Comanche','Acción','1.0',false,879160], ['crash-bandicoot','Crash Bandicoot N. Sane Trilogy','Acción','1.0',false,731490], ['crysis-3','Crysis 3 Remastered','Acción','1.0',false,1715130], ['dark-souls-remastered','Dark Souls Remastered','Acción','1.0',false,570940], ['dark-souls-2','Dark Souls II: Scholar of the First Sin','Acción','1.0',false,335300], ['dark-souls-3','Dark Souls III','Acción','1.0',false,374320], ['dead-space','Dead Space','Acción','1.0',false,1693980], ['dead-space-2','Dead Space 2','Acción','1.0',false,47780], ['dead-space-3','Dead Space 3','Acción','1.0',false,1238060], ['darksiders-genesis','Darksiders Genesis','Acción','1.0',false,710920],
+  ['devil-may-cry-4','Devil May Cry 4 Special Edition','Acción','1.0',false,329050], ['disgaea-5','Disgaea 5 Complete','Estrategia','1.0',false,495280], ['dragon-quest-builders-2','DRAGON QUEST BUILDERS 2','Aventura','1.0',false,1072420], ['dyson-sphere-program','Dyson Sphere Program','Estrategia','1.0',false,1366540], ['earth-defense-force-5','EARTH DEFENSE FORCE 5','Acción','1.0',false,1007040], ['eiyuden-chronicle','Eiyuden Chronicle: Hundred Heroes','Aventura','1.0',false,1658280], ['enotria','Enotria: The Last Song','Acción','1.0',false,2102450], ['everhood','Everhood','Indie','1.0',false,1229380], ['fable-anniversary','Fable Anniversary','Aventura','1.0',false,288470], ['far-cry-5','Far Cry 5','Acción','1.0',false,939960],
+  ['final-fantasy-vii-remake','FINAL FANTASY VII REMAKE','Aventura','1.0',false,1462040], ['final-fantasy-xv','FINAL FANTASY XV','Aventura','1.0',false,637650], ['forspoken','Forspoken','Aventura','1.0',false,1680880], ['ghost-of-tsushima','Ghost of Tsushima DIRECTOR’S CUT','Acción','1.0',false,2215430], ['god-of-war','God of War','Acción','1.0',false,1593500], ['god-of-war-ragnarok','God of War Ragnarök','Acción','1.0',false,2322010], ['granblue-fantasy-relink','Granblue Fantasy: Relink','Acción','1.0',false,881020], ['greedfall','GreedFall','Aventura','1.0',false,606880], ['harry-potter-legacy','Hogwarts Legacy','Aventura','1.0',false,990080], ['immortals-fenyx-rising','Immortals Fenyx Rising','Aventura','1.0',false,2221920],
+  ['judgment','Judgment','Aventura','1.0',false,2058180], ['kingdom-hearts-3','KINGDOM HEARTS III + Re Mind','Aventura','1.0',false,2552450], ['lego-star-wars','LEGO Star Wars: The Skywalker Saga','Aventura','1.0',false,920210], ['lies-of-p','Lies of P','Acción','1.0',false,1627720], ['like-a-dragon-infinite-wealth','Like a Dragon: Infinite Wealth','Aventura','1.0',false,2072450], ['lost-judgment','Lost Judgment','Aventura','1.0',false,2058180], ['mad-max','Mad Max','Acción','1.0',false,234140], ['mass-effect-2','Mass Effect 2','Aventura','1.0',false,24980], ['mass-effect-3','Mass Effect 3','Aventura','1.0',false,1238020], ['nioh-2','Nioh 2 – The Complete Edition','Acción','1.0',false,1325200]
+].map(([id, name, category, version, free, appId]) => ({
+  id, name, category, version, free, method: 'Steam',
+  command: `steam steam://rungameid/${appId}`,
+  image: `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/header.jpg`,
+  description: `${name}: instala y ejecútalo en Ubuntu con Steam y Proton.`,
+  youtube: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} Ubuntu Linux instalar Proton`)}`,
+  rating: 'Nuevo'
+}));
+games.push(...moreGames);
+
 const savedGames = JSON.parse(localStorage.getItem('ubuntu-arcade-community') || '[]');
 games.unshift(...savedGames);
+
+const releaseYears = { minecraft: 2011, 'supertuxkart': 2007, '0ad': 2010, terraria: 2011, 'stardew-valley': 2016, celeste: 2018, 'hollow-knight': 2017, 'counter-strike-2': 2023, 'baldurs-gate-3': 2023, 'elden-ring': 2022, hades: 2020, factorio: 2020, rimworld: 2018, valheim: 2021, 'project-zomboid': 2013, 'vampire-survivors': 2022, 'palworld': 2024, 'hades-2': 2024, 'balatro': 2024, 'animal-well': 2024, 'sea-of-stars': 2023, dredge: 2023, 'dave-the-diver-2': 2023, 'manor-lords': 2024, 'cities-skylines-2': 2023, 'marvel-rivals': 2024, 'v-rising': 2024, neva: 2024, 'the-talos-principle-2': 2023, 'against-the-storm': 2023, 'age-of-empires-iv': 2021, 'frostpunk-2': 2024, 'dead-cells': 2018, 'risk-of-rain-2': 2019, 'deep-rock-galactic': 2020, 'no-mans-sky': 2016, subnautica: 2018, 'the-witcher-3': 2015, 'witcher-3': 2015, 'beyond-good-and-evil': 2003, quake: 1996, 'the-banner-saga': 2014, 'the-room': 2012 };
+const twoDimensionalGames = new Set(['supertuxkart', 'terraria', 'celeste', 'hollow-knight', 'stardew-valley', 'vampire-survivors', 'dead-cells', 'hades', 'balatro', 'animal-well', 'sea-of-stars', 'dredge', 'shovel-knight', 'the-messenger', 'hotline-miami', 'undertale', 'baba-is-you', 'limbo', 'inside', 'geometry-dash', 'frozen-bubble', 'hedgewars', 'teeworlds', 'super-tux', 'neverball', 'spelunky', 'spelunky-2', 'rogue-legacy', 'rogue-legacy-2', 'nuclear-throne', 'broforce', 'katana-zero', 'tunic', 'slay-the-spire', 'into-the-breach', 'loop-hero', 'papers-please']);
+games.forEach(game => { game.releaseYear = releaseYears[game.id] || 2020; game.dimension = twoDimensionalGames.has(game.id) ? '2D' : '3D'; });
 
 const grid = document.querySelector('#game-grid');
 const searchInput = document.querySelector('#search-input');
@@ -289,6 +310,8 @@ const count = document.querySelector('#results-count');
 const empty = document.querySelector('#empty-state');
 let activeFilter = 'Todos';
 let activeSource = 'Todos';
+let activeYear = 'Todos';
+let activeDimension = 'Todos';
 const knownSteamIds = { supertuxkart: '90400', '0ad': '597280', wesnoth: '599390', 'endless-sky': '404410', openttd: '1536610', mindustry: '1127400', hedgewars: '321360', teeworlds: '380840', supertux: '15700' };
 
 function getGameImage(game) {
@@ -333,20 +356,35 @@ function getDownloadLinks(game) {
   return [['Descargas del launcher', 'https://lutris.net/downloads', 'Instala Lutris para ejecutar este juego']];
 }
 
+function getDownloadIdentifier(game) {
+  const steamId = game.command.match(/steam:\/\/rungameid\/(\d+)/)?.[1];
+  const flatpakId = game.command.match(/flathub\s+([\w.-]+)/)?.[1];
+  const aptPackage = game.command.match(/apt install\s+([\w.-]+)/)?.[1];
+  const lutrisId = game.command.match(/lutris install\s+([\w-]+)/)?.[1];
+  if (steamId) return ['Steam App ID', steamId];
+  if (flatpakId) return ['Flatpak ID', flatpakId];
+  if (aptPackage) return ['Paquete APT', aptPackage];
+  if (lutrisId) return ['ID de Lutris', lutrisId];
+  return ['Comando', game.command];
+}
+
 function renderGames() {
   const query = searchInput.value.toLowerCase().trim();
   const filtered = games.filter(game => {
     const matchesFilter = activeFilter === 'Todos' || game.category === activeFilter;
     const matchesSource = activeSource === 'Todos' || (activeSource === 'Gratis' && game.free) || (activeSource === 'De pago' && !game.free) || game.method === activeSource;
+    const matchesYear = activeYear === 'Todos' || (activeYear === '2024-2026' && game.releaseYear >= 2024) || (activeYear === '2020-2023' && game.releaseYear >= 2020 && game.releaseYear <= 2023) || (activeYear === 'Antes de 2020' && game.releaseYear < 2020);
+    const matchesDimension = activeDimension === 'Todos' || game.dimension === activeDimension;
     const matchesQuery = [game.name, game.category, game.method, game.description].join(' ').toLowerCase().includes(query);
-    return matchesFilter && matchesSource && matchesQuery;
-  });
+    return matchesFilter && matchesSource && matchesYear && matchesDimension && matchesQuery;
+  }).sort((first, second) => first.name.localeCompare(second.name, 'es', { sensitivity: 'base' }));
   count.textContent = `${filtered.length} ${filtered.length === 1 ? 'resultado' : 'resultados'}`;
+  document.querySelector('#total-games').textContent = games.length;
   empty.hidden = filtered.length !== 0;
   grid.innerHTML = filtered.map(game => `
     <article class="game-card">
       <div class="game-cover" style="background-image:url('${getGameImage(game)}')"><span class="cover-label">${game.method}</span></div>
-      <div class="game-body"><div class="game-meta"><span>${game.category}</span>${game.free ? '<span class="free-label">● Gratis</span>' : '<span>De pago</span>'}</div>
+      <div class="game-body"><div class="game-meta"><span>${game.category} · ${game.releaseYear} · ${game.dimension}</span>${game.free ? '<span class="free-label">● Gratis</span>' : '<span>De pago</span>'}</div>
       <h3>${game.name}</h3><p class="game-desc">${game.description}</p><div class="card-bottom"><span class="version">v${game.version}</span><button class="detail-button" data-game="${game.id}">Ver instalación <span>↗</span></button></div></div>
     </article>`).join('');
   document.querySelectorAll('[data-game]').forEach(button => button.addEventListener('click', () => openGame(button.dataset.game)));
@@ -357,7 +395,8 @@ function openGame(id) {
   trackEvent('view_game', { game_name: game.name, install_method: game.method });
   const launcherLinks = getLauncherOptions(game).map(([label, url, detail]) => `<a class="launcher-option" href="${url}" target="_blank" rel="noopener noreferrer"><span><strong>${label}</strong><small>${detail}</small></span><b>↗</b></a>`).join('');
   const downloadLinks = getDownloadLinks(game).map(([label, url, detail]) => `<a class="launcher-option download-option" href="${url}" target="_blank" rel="noopener noreferrer"><span><strong>${label}</strong><small>${detail}</small></span><b>↓</b></a>`).join('');
-  document.querySelector('#modal-content').innerHTML = `<div class="modal-cover" style="background-image:url('${getGameImage(game)}')"></div><div class="game-meta"><span>${game.category} · ${game.method}</span><span class="free-label">★ ${game.rating}</span></div><h2 id="modal-title">${game.name}</h2><p class="modal-copy">${game.description}</p><div class="modal-command"><code>$ ${game.command}</code><button class="copy-command" data-copy="${game.command}">Copiar comando</button></div><div class="launcher-section"><h3>Launchers y descargas</h3><div class="launcher-list">${launcherLinks}</div><h3 class="download-heading">Descarga directa</h3><div class="launcher-list">${downloadLinks}</div></div><a class="guide-link" href="${game.youtube}" target="_blank" rel="noreferrer">▶ Ver guías en YouTube ↗</a>`;
+  const [identifierLabel, identifier] = getDownloadIdentifier(game);
+  document.querySelector('#modal-content').innerHTML = `<div class="modal-cover" style="background-image:url('${getGameImage(game)}')"></div><div class="game-meta"><span>${game.category} · ${game.method}</span><span class="free-label">★ ${game.rating}</span></div><h2 id="modal-title">${game.name}</h2><p class="modal-copy">${game.description}</p><div class="download-id"><span>${identifierLabel}</span><code>${identifier}</code></div><div class="modal-command"><code>$ ${game.command}</code><button class="copy-command" data-copy="${game.command}">Copiar comando</button></div><div class="launcher-section"><h3>Launchers y descargas</h3><div class="launcher-list">${launcherLinks}</div><h3 class="download-heading">Descarga directa</h3><div class="launcher-list">${downloadLinks}</div></div><a class="guide-link" href="${game.youtube}" target="_blank" rel="noreferrer">▶ Ver guías en YouTube ↗</a>`;
   document.querySelector('[data-copy]').addEventListener('click', async (event) => {
     const button = event.currentTarget;
     try {
@@ -375,6 +414,8 @@ function closeModals() { document.querySelectorAll('.modal-backdrop').forEach(mo
 
 document.querySelectorAll('[data-filter]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-filter]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeFilter = chip.dataset.filter; renderGames(); }));
 document.querySelectorAll('[data-source]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-source]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeSource = chip.dataset.source; renderGames(); }));
+document.querySelectorAll('[data-year]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-year]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeYear = chip.dataset.year; renderGames(); }));
+document.querySelectorAll('[data-dimension]').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('[data-dimension]').forEach(item => item.classList.remove('active')); chip.classList.add('active'); activeDimension = chip.dataset.dimension; renderGames(); }));
 searchInput.addEventListener('input', () => {
   renderGames();
   if (searchInput.value.trim()) trackEvent('search_catalog', { search_term: searchInput.value.trim().slice(0, 80) });
@@ -389,7 +430,7 @@ document.addEventListener('keydown', event => { if (event.key === 'Escape') clos
 document.querySelector('#submit-form').addEventListener('submit', event => {
   event.preventDefault();
   const data = new FormData(event.target);
-  const newGame = { id: `community-${Date.now()}`, name: data.get('name'), category: data.get('category'), version: data.get('version'), free: true, method: 'Comunidad', image: 'https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&w=900&q=80', description: 'Recomendado por la comunidad de Ubuntu Arcade.', command: data.get('command'), youtube: data.get('youtube') || 'https://www.youtube.com/results?search_query=linux+ubuntu+juegos', rating: 'Nuevo' };
+  const newGame = { id: `community-${Date.now()}`, name: data.get('name'), category: data.get('category'), version: data.get('version'), releaseYear: new Date().getFullYear(), dimension: '3D', free: true, method: 'Comunidad', image: 'https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&w=900&q=80', description: 'Recomendado por la comunidad de Ubuntu Arcade.', command: data.get('command'), youtube: data.get('youtube') || 'https://www.youtube.com/results?search_query=linux+ubuntu+juegos', rating: 'Nuevo' };
   games.unshift(newGame); localStorage.setItem('ubuntu-arcade-community', JSON.stringify([newGame, ...savedGames])); trackEvent('submit_game', { game_name: newGame.name, category: newGame.category }); event.target.reset(); closeModals(); renderGames(); document.querySelector('#explorar').scrollIntoView({behavior:'smooth'});
 });
 

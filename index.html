@@ -47,7 +47,7 @@
     </section>
 
     <section class="stats-strip" aria-label="Estadísticas del catálogo">
-      <div><strong>326</strong><span>juegos listados</span></div>
+      <div><strong id="total-games">376</strong><span>juegos listados</span></div>
       <div><strong>42</strong><span>gratuitos</span></div>
       <div><strong>19</strong><span>guías en español</span></div>
       <div class="status"><span class="pulse"></span> Última sincronización <strong>hace 2h</strong></div>
@@ -74,6 +74,17 @@
           <button class="filter-chip" data-source="Lutris">Lutris</button>
           <button class="filter-chip" data-source="Oficial">Oficial</button>
           <button class="filter-chip" data-source="Comunidad">Comunidad</button>
+        </div>
+        <div class="filter-group" role="group" aria-label="Filtros de año">
+          <button class="filter-chip active" data-year="Todos">Todos los años</button>
+          <button class="filter-chip" data-year="2024-2026">2024–2026</button>
+          <button class="filter-chip" data-year="2020-2023">2020–2023</button>
+          <button class="filter-chip" data-year="Antes de 2020">Antes de 2020</button>
+        </div>
+        <div class="filter-group" role="group" aria-label="Filtros de formato">
+          <button class="filter-chip active" data-dimension="Todos">2D / 3D</button>
+          <button class="filter-chip" data-dimension="2D">2D</button>
+          <button class="filter-chip" data-dimension="3D">3D</button>
         </div>
       </div>
       <div class="game-grid" id="game-grid"></div>
