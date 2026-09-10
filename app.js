@@ -242,6 +242,44 @@ const additionalGames = [
 }));
 games.push(...additionalGames.slice(0, 100));
 
+const launcherGames = [
+  ['balatro','Balatro','Indie','1.1',false,2379780], ['animal-well','ANIMAL WELL','Aventura','1.0',false,813230], ['hades-2','Hades II','Acción','1.0',false,1145350], ['sea-of-stars','Sea of Stars','Aventura','1.0',false,1244090], ['chained-echoes','Chained Echoes','Aventura','1.0',false,1229240], ['cassette-beasts','Cassette Beasts','Indie','1.7',false,1321440], ['dredge','DREDGE','Aventura','1.5',false,1562430], ['dave-the-diver-2','DAVE THE DIVER','Indie','1.0',false,1868140], ['caves-of-qud','Caves of Qud','Aventura','1.0',false,333640], ['underrail','UnderRail','Aventura','1.2',false,250520],
+  ['darkest-dungeon','Darkest Dungeon','Estrategia','1.0',false,262060], ['darkest-dungeon-2','Darkest Dungeon II','Estrategia','1.0',false,1940340], ['monster-train','Monster Train','Estrategia','2.0',false,1102190], ['inscryption-2','Inscryption','Indie','1.0',false,1092790], ['roguebook','Roguebook','Estrategia','1.0',false,1076200], ['griftlands','Griftlands','Estrategia','1.0',false,601840], ['fights-in-tight-spaces','Fights in Tight Spaces','Estrategia','1.0',false,1265820], ['wildfrost','Wildfrost','Estrategia','1.0',false,1811990], ['balatro-poker','Poker Quest','Indie','1.0',false,1184820], ['dicey-dungeons','Dicey Dungeons','Indie','1.0',false,861540],
+  ['rain-world','Rain World','Aventura','1.0',false,312520], ['ori-blind-forest','Ori and the Blind Forest','Aventura','1.0',false,261570], ['guacamelee-2','Guacamelee! 2','Acción','1.0',false,578650], ['shovel-knight','Shovel Knight: Treasure Trove','Indie','4.0',false,250760], ['the-messenger','The Messenger','Acción','1.0',false,764790], ['endless-space-2','Endless Space 2','Estrategia','1.5',false,392110], ['stellaris','Stellaris','Estrategia','4.0',false,281990], ['crusader-kings-3','Crusader Kings III','Estrategia','1.18',false,1158310], ['europa-universalis-4','Europa Universalis IV','Estrategia','1.38',false,236850], ['hearts-of-iron-4','Hearts of Iron IV','Estrategia','1.17',false,394360],
+  ['victoria-3','Victoria 3','Estrategia','1.10',false,529340], ['surviving-the-aftermath','Surviving the Aftermath','Estrategia','1.0',false,684450], ['banished','Banished','Estrategia','1.0',false,242920], ['foundation','Foundation','Estrategia','1.0',false,690830], ['manor-lords','Manor Lords','Estrategia','0.8',false,1363080], ['workers-resources','Workers & Resources: Soviet Republic','Estrategia','1.0',false,784150], ['railway-empire','Railway Empire','Estrategia','1.0',false,503940], ['transport-fever-2','Transport Fever 2','Estrategia','1.0',false,1066780], ['planet-zoo','Planet Zoo','Estrategia','1.0',false,703080], ['planet-coaster','Planet Coaster','Estrategia','1.0',false,493340],
+  ['racing-room','RaceRoom Racing Experience','Acción','1.0',true,211500], ['assetto-corsa','Assetto Corsa','Acción','1.16',false,244210], ['assetto-corsa-competizione','Assetto Corsa Competizione','Acción','1.9',false,805550], ['forza-horizon-4','Forza Horizon 4','Acción','1.0',false,1293830], ['forza-horizon-5','Forza Horizon 5','Acción','1.0',false,1551360], ['need-for-speed-heat','Need for Speed Heat','Acción','1.0',false,1222680], ['the-crew-2','The Crew 2','Acción','1.0',false,646910], ['motogp-24','MotoGP 24','Acción','1.0',false,2581700], ['ride-5','RIDE 5','Acción','1.0',false,1650010], ['powerwash-simulator','PowerWash Simulator','Indie','1.0',false,1290000],
+  ['house-flipper','House Flipper','Indie','1.0',false,613100], ['car-mechanic-simulator','Car Mechanic Simulator 2021','Indie','1.0',false,1190000], ['thief-simulator','Thief Simulator','Indie','1.0',false,704850], ['goat-simulator-3','Goat Simulator 3','Indie','1.0',false,850170], ['pc-building-simulator','PC Building Simulator','Indie','1.0',false,621060], ['internet-cafe-simulator','Internet Cafe Simulator','Indie','1.0',false,1137750], ['cooking-simulator','Cooking Simulator','Indie','1.0',false,641320], ['house-flipper-2','House Flipper 2','Indie','1.0',false,1190970], ['unpacking','Unpacking','Indie','1.0',false,1135690], ['coffee-talk','Coffee Talk','Indie','1.0',false,914800],
+  ['coffee-talk-2','Coffee Talk Episode 2','Indie','1.0',false,1663220], ['toem','TOEM','Indie','1.0',false,1307580], ['assemble-with-care','Assemble with Care','Indie','1.0',false,1202900], ['a-little-to-the-left','A Little to the Left','Indie','1.0',false,1629520], ['dorfromantik-2','Dorfromantik','Estrategia','1.1',false,1455840], ['mini-motorways','Mini Motorways','Estrategia','1.0',false,1127500], ['mini-metro','Mini Metro','Estrategia','1.0',false,287980], ['islanders','ISLANDERS','Estrategia','1.0',false,1046030], ['townscaper','Townscaper','Indie','1.0',false,1291340], ['cloud-gardens','Cloud Gardens','Indie','1.0',false,1372320],
+  ['terraria-journey','Terraria: Journey Mode','Aventura','1.4.5',false,105600], ['starbound-frackin','Starbound','Aventura','1.4.4',false,211820], ['empyrion','Empyrion - Galactic Survival','Aventura','1.0',false,383120], ['icarus','Icarus','Aventura','1.0',false,1149460], ['the-infected','The Infected','Aventura','1.0',false,1360000], ['smalland','Smalland: Survive the Wilds','Aventura','1.0',false,768200], ['conan-exiles','Conan Exiles','Aventura','1.0',false,440900], ['ark-survival-evolved','ARK: Survival Evolved','Aventura','1.0',false,346110], ['ark-survival-ascended','ARK: Survival Ascended','Aventura','1.0',false,2399830], ['7-days-to-die','7 Days to Die','Aventura','2.0',false,251570],
+  ['state-of-decay-2','State of Decay 2','Acción','1.0',false,495420], ['days-gone','Days Gone','Acción','1.0',false,1259420], ['red-dead-redemption-2','Red Dead Redemption 2','Aventura','1.0',false,1174180], ['grand-theft-auto-5','Grand Theft Auto V','Acción','1.0',false,271590], ['grand-theft-auto-4','Grand Theft Auto IV','Acción','1.0',false,12210], ['mafia-definitive','Mafia: Definitive Edition','Acción','1.0',false,1030840], ['mafia-2','Mafia II: Definitive Edition','Acción','1.0',false,1030830], ['sleeping-dogs','Sleeping Dogs: Definitive Edition','Acción','1.0',false,307690], ['just-cause-3','Just Cause 3','Acción','1.0',false,225540], ['saints-row-iv','Saints Row IV','Acción','1.0',false,206420],
+  ['mass-effect-legendary','Mass Effect Legendary Edition','Aventura','1.0',false,1328670], ['dragon-age-inquisition','Dragon Age: Inquisition','Aventura','1.0',false,1222690], ['star-wars-jedi-fallen-order','STAR WARS Jedi: Fallen Order','Acción','1.0',false,1172380], ['star-wars-jedi-survivor','STAR WARS Jedi: Survivor','Acción','1.0',false,1774580], ['guardians-of-the-galaxy','Marvel’s Guardians of the Galaxy','Aventura','1.0',false,1088850], ['marvel-rivals','Marvel Rivals','Acción','1.0',true,2767030], ['paladins-2','Paladins','Acción','1.0',true,444090], ['smite-2','SMITE 2','Acción','1.0',true,2437170], ['realm-royale','Realm Royale Reforged','Acción','1.0',true,813820], ['splitgate','Splitgate','Acción','1.0',true,677620],
+  ['the-binding-of-isaac','The Binding of Isaac: Rebirth','Acción','1.7',false,250900], ['nuclear-throne','Nuclear Throne','Acción','1.0',false,242680], ['spelunky','Spelunky','Aventura','1.0',false,239350], ['spelunky-2','Spelunky 2','Aventura','1.0',false,418530], ['risk-of-rain','Risk of Rain','Acción','1.4',false,248820], ['rogue-legacy','Rogue Legacy','Acción','1.0',false,241600], ['rogue-legacy-2','Rogue Legacy 2','Acción','1.0',false,1253920], ['children-of-morta','Children of Morta','Acción','1.0',false,330020], ['wizard-of-legend-2','Wizard of Legend 2','Acción','1.0',false,2193540], ['moonlighter','Moonlighter','Indie','1.0',false,606150]
+].map(([id, name, category, version, free, appId]) => ({
+  id, name, category, version, free, method: 'Steam',
+  command: `steam steam://rungameid/${appId}`,
+  image: `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/header.jpg`,
+  description: `${name}: disponible para jugar en Ubuntu mediante Steam y Proton.`,
+  youtube: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} Ubuntu Linux Proton instalar`)}`,
+  rating: 'Nuevo'
+}));
+games.push(...launcherGames.slice(0, 100));
+
+const directDownloadGames = [
+  ['v-rising','V Rising','Aventura','1.1',false,1604030], ['sons-of-valhalla','Sons of Valhalla','Acción','1.0',false,1659420], ['cobalt-core','Cobalt Core','Estrategia','1.0',false,2179850], ['dotage','dotAGE','Estrategia','1.0',false,638510], ['lunistice','Lunistice','Indie','1.0',false,1709730], ['wavetale','WaveTale','Aventura','1.0',false,1823930], ['the-talos-principle','The Talos Principle','Aventura','1.0',false,257510], ['the-talos-principle-2','The Talos Principle 2','Aventura','1.0',false,835960], ['the-room','The Room','Indie','1.0',false,288160], ['the-room-two','The Room Two','Indie','1.0',false,425580],
+  ['the-room-three','The Room Three','Indie','1.0',false,456750], ['the-room-old-sins','The Room: Old Sins','Indie','1.0',false,1044620], ['gorogoa','Gorogoa','Indie','1.0',false,557600], ['gris','GRIS','Aventura','1.0',false,683320], ['neva','Neva','Aventura','1.0',false,386940], ['abzu','ABZU','Aventura','1.0',false,384190], ['journey','Journey','Aventura','1.0',false,638230], ['flower','flower','Indie','1.0',false,966330], ['the-artful-escape','The Artful Escape','Aventura','1.0',false,1122680], ['sable','Sable','Aventura','1.0',false,757310],
+  ['the-red-lantern','The Red Lantern','Aventura','1.0',false,1053710], ['eastward','Eastward','Aventura','1.0',false,977880], ['sea-of-solitude','Sea of Solitude','Aventura','1.0',false,1225590], ['night-in-the-woods','Night in the Woods','Aventura','1.0',false,481510], ['the-stanley-parable','The Stanley Parable: Ultra Deluxe','Indie','1.0',false,1703340], ['superliminal','Superliminal','Indie','1.0',false,1049410], ['viewfinder','Viewfinder','Indie','1.0',false,1382070], ['manifold-garden','Manifold Garden','Indie','1.0',false,473950], ['antichamber','Antichamber','Indie','1.0',false,219890], ['the-swappers','The Swapper','Indie','1.0',false,231160],
+  ['thimbleweed-park','Thimbleweed Park','Aventura','1.0',false,569860], ['broken-age','Broken Age','Aventura','1.0',false,232790], ['deponia','Deponia','Aventura','1.0',false,214340], ['deponia-doomsday','Deponia Doomsday','Aventura','1.0',false,421050], ['grim-fandango','Grim Fandango Remastered','Aventura','1.0',false,316790], ['full-throttle','Full Throttle Remastered','Aventura','1.0',false,228360], ['day-of-the-tentacle','Day of the Tentacle Remastered','Aventura','1.0',false,388210], ['sam-max','Sam & Max Save the World','Aventura','1.0',false,1440440], ['the-wolf-among-us','The Wolf Among Us','Aventura','1.0',false,250320], ['tales-from-borderlands','Tales from the Borderlands','Aventura','1.0',false,330830],
+  ['shadow-tactics','Shadow Tactics: Blades of the Shogun','Estrategia','1.0',false,418240], ['desperados-3','Desperados III','Estrategia','1.0',false,610370], ['mutant-year-zero','Mutant Year Zero: Road to Eden','Estrategia','1.0',false,760060], ['expeditions-rome','Expeditions: Rome','Estrategia','1.0',false,987840], ['phoenix-point','Phoenix Point','Estrategia','1.0',false,839770], ['gloomhaven','Gloomhaven','Estrategia','1.0',false,780290], ['wartales','Wartales','Estrategia','1.0',false,1527950], ['battle-brothers','Battle Brothers','Estrategia','1.0',false,365360], ['darkest-dungeon-ancestral','Darkest Dungeon','Estrategia','1.0',false,262060], ['the-banner-saga','The Banner Saga','Estrategia','1.0',false,237990]
+].map(([id, name, category, version, free, appId]) => ({
+  id, name, category, version, free, method: 'Steam',
+  command: `steam steam://rungameid/${appId}`,
+  image: `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/header.jpg`,
+  description: `${name}: descarga y ejecútalo en Ubuntu mediante Steam y Proton.`,
+  youtube: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} Ubuntu Linux instalar Proton`)}`,
+  rating: 'Nuevo'
+}));
+games.push(...directDownloadGames);
+
 const savedGames = JSON.parse(localStorage.getItem('ubuntu-arcade-community') || '[]');
 games.unshift(...savedGames);
 
@@ -257,6 +295,42 @@ function getGameImage(game) {
   const steamId = game.command.match(/steam:\/\/rungameid\/(\d+)/)?.[1] || knownSteamIds[game.id];
   if (steamId) return `https://cdn.cloudflare.steamstatic.com/steam/apps/${steamId}/header.jpg`;
   return `https://placehold.co/900x500/17212b/e8f54a?text=${encodeURIComponent(game.name)}`;
+}
+
+function getLauncherOptions(game) {
+  if (game.id === 'minecraft') return [
+    ['Launcher oficial', 'https://www.minecraft.net/es-es/download', 'Recomendado · requiere una cuenta con licencia'],
+    ['Prism Launcher', 'https://prismlauncher.org/download/', 'Open source · modpacks y múltiples instancias'],
+    ['TLauncher', 'https://tlauncher.org/en/', 'Tercero · revisa sus condiciones y usa una cuenta legítima']
+  ];
+  if (game.method === 'Steam') return [
+    ['Steam para Linux', 'https://store.steampowered.com/about/', 'Launcher principal · soporte Proton'],
+    ['Lutris', 'https://lutris.net/downloads', 'Alternativa para organizar Wine y juegos externos'],
+    ['Heroic Games Launcher', 'https://heroicgameslauncher.com/downloads', 'Epic, GOG y Amazon Games'],
+    ['Bottles', 'https://usebottles.com/download/', 'Gestiona prefijos de Wine'],
+    ['ProtonUp-Qt', 'https://davidotek.github.io/protonup-qt/', 'Instala versiones adicionales de Proton']
+  ];
+  if (game.method === 'Lutris') return [
+    ['Lutris', 'https://lutris.net/downloads', 'Launcher recomendado para este juego'],
+    ['Heroic Games Launcher', 'https://heroicgameslauncher.com/downloads', 'Alternativa para tiendas compatibles'],
+    ['Bottles', 'https://usebottles.com/download/', 'Gestiona el entorno de Wine']
+  ];
+  return [
+    ['Ubuntu App Center', 'https://apps.ubuntu.com/', 'Instalación nativa de Ubuntu'],
+    ['Flathub', 'https://flathub.org/', 'Alternativa universal para Linux'],
+    ['Lutris', 'https://lutris.net/downloads', 'Para juegos externos y Wine']
+  ];
+}
+
+function getDownloadLinks(game) {
+  const steamId = game.command.match(/steam:\/\/rungameid\/(\d+)/)?.[1];
+  if (steamId) return [
+    ['Abrir en Steam', `https://store.steampowered.com/app/${steamId}/`, 'Página oficial del juego'],
+    ['Instalar Steam', 'https://store.steampowered.com/about/', 'Descarga oficial para Linux']
+  ];
+  if (game.command.startsWith('flatpak')) return [['Abrir Flathub', 'https://flathub.org/', 'Busca el ID del comando Flatpak']];
+  if (game.command.startsWith('sudo apt')) return [['Paquetes de Ubuntu', 'https://packages.ubuntu.com/', 'Consulta la versión de tu distribución']];
+  return [['Descargas del launcher', 'https://lutris.net/downloads', 'Instala Lutris para ejecutar este juego']];
 }
 
 function renderGames() {
@@ -281,7 +355,18 @@ function renderGames() {
 function openGame(id) {
   const game = games.find(item => item.id === id);
   trackEvent('view_game', { game_name: game.name, install_method: game.method });
-  document.querySelector('#modal-content').innerHTML = `<div class="modal-cover" style="background-image:url('${getGameImage(game)}')"></div><div class="game-meta"><span>${game.category} · ${game.method}</span><span class="free-label">★ ${game.rating}</span></div><h2 id="modal-title">${game.name}</h2><p class="modal-copy">${game.description}</p><div class="modal-command">$ ${game.command}</div><a class="guide-link" href="${game.youtube}" target="_blank" rel="noreferrer">▶ Ver guías en YouTube ↗</a>`;
+  const launcherLinks = getLauncherOptions(game).map(([label, url, detail]) => `<a class="launcher-option" href="${url}" target="_blank" rel="noopener noreferrer"><span><strong>${label}</strong><small>${detail}</small></span><b>↗</b></a>`).join('');
+  const downloadLinks = getDownloadLinks(game).map(([label, url, detail]) => `<a class="launcher-option download-option" href="${url}" target="_blank" rel="noopener noreferrer"><span><strong>${label}</strong><small>${detail}</small></span><b>↓</b></a>`).join('');
+  document.querySelector('#modal-content').innerHTML = `<div class="modal-cover" style="background-image:url('${getGameImage(game)}')"></div><div class="game-meta"><span>${game.category} · ${game.method}</span><span class="free-label">★ ${game.rating}</span></div><h2 id="modal-title">${game.name}</h2><p class="modal-copy">${game.description}</p><div class="modal-command"><code>$ ${game.command}</code><button class="copy-command" data-copy="${game.command}">Copiar comando</button></div><div class="launcher-section"><h3>Launchers y descargas</h3><div class="launcher-list">${launcherLinks}</div><h3 class="download-heading">Descarga directa</h3><div class="launcher-list">${downloadLinks}</div></div><a class="guide-link" href="${game.youtube}" target="_blank" rel="noreferrer">▶ Ver guías en YouTube ↗</a>`;
+  document.querySelector('[data-copy]').addEventListener('click', async (event) => {
+    const button = event.currentTarget;
+    try {
+      await navigator.clipboard.writeText(button.dataset.copy);
+      button.textContent = 'Copiado';
+    } catch {
+      button.textContent = 'Selecciona el comando';
+    }
+  });
   showModal('game-modal');
 }
 
